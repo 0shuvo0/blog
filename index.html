@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="">
+	<meta name="author" content="MdShuvo">
+	<link rel="stylesheet" href="public/css/font-awesome.css">
+	<link rel="stylesheet" href="public/css/style.css">
+	<title>FeelsShare</title>
+</head>
+<body>
+<div id="app" v-cloak>
+	<header class="navbar">
+		<i class="fas fa-bars icon-btn" v-on:click="navbarIsActive = !navbarIsActive"></i>
+		<router-link to="/">FeelsShare</router-link>
+		<i class="fas fa-bell icon-btn notifications" v-if="userIsLoggedin">
+			<span>99</span>
+		</i>
+		<router-link to="/login" class="icon-btn link" v-else>
+			<i class="fas fa-sign-in-alt"></i>
+		</router-link>
+	</header>
+	
+	
+	<div class="side-menu-wrapper" v-bind:style="{ left: navbarIsActive? 0 : '-100%' }" v-on:click="navbarIsActive = false">
+		<div class="side-menu">
+			<router-link to="/" class="nav-item">
+				<i class="fas fa-home"></i>
+				<span>Home</span>
+			</router-link>
+			<a href="#" class="nav-item" v-if="userIsLoggedin">
+				<i class="fas fa-user"></i>
+				<span>Profile</span>
+			</a>
+			<router-link to="/about" class="nav-item">
+				<i class="fas fa-info"></i>
+				<span>About</span>
+			</router-link>
+			<a href="#" class="nav-item" v-if="userIsLoggedin" v-on:click="logoutUser()">
+				<i class="fas fa-sign-out-alt"></i>
+				<span>Logout</span>
+			</a>
+			<router-link to="/login" class="nav-item" v-else>
+				<i class="fas fa-sign-in-alt"></i>
+				<span>Login</span>
+			</router-link>
+		</div>
+	</div>
+	
+	<div class="container">
+		<router-view></router-view>
+	</div><!-- /container -->
+
+</div>
+<script src="public/js/vue.js"></script>
+<script src="public/js/vue-router.js"></script>
+<script src="public/js/axios.js"></script>
+<script src="public/js/funcs.js"></script>
+<script src="public/js/main.js"></script>
+</body>
+</html>
